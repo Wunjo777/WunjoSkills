@@ -1,6 +1,9 @@
-# WunjoSkills
+# WunjoAgentTools
+
 ---
-Several practical Skills for coding agents.
+
+Several practical Skills/Tools for coding agents.
+
 ---
 
 # cexp(change explainer)
