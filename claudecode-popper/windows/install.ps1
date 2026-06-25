@@ -1,9 +1,9 @@
 # Claude Code Popper - Windows Installer
-# One-line: irm https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main/windows/install.ps1 | iex
+# One-line: irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/windows/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
 
-$repoBase = "https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main"
+$repoBase = "https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master"
 $installDir = Join-Path $env:USERPROFILE ".claude\claudecode-popper"
 $settingsPath = Join-Path $env:USERPROFILE ".claude\settings.json"
 

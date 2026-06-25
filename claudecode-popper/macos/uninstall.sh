@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Claude Code Popper - macOS Uninstaller
-# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main/macos/uninstall.sh | bash
+# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/macos/uninstall.sh | bash
 
 set -e
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Claude Code Popper - Linux Installer
-# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main/linux/install.sh | bash
+# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/linux/install.sh | bash
 
 set -e
 
-REPO_BASE="https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main"
+REPO_BASE="https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master"
 INSTALL_DIR="$HOME/.claude/claudecode-popper"
 SETTINGS_FILE="$HOME/.claude/settings.json"
 

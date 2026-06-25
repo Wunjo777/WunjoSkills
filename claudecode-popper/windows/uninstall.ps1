@@ -1,5 +1,5 @@
 # Claude Code Popper - Windows Uninstaller
-# One-line: irm https://raw.githubusercontent.com/Wunjo777/claudecode-popper/main/windows/uninstall.ps1 | iex
+# One-line: irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/windows/uninstall.ps1 | iex
 
 $ErrorActionPreference = "Stop"
 
