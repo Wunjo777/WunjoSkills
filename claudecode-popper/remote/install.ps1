@@ -2,11 +2,11 @@
 # Installs the remote popup script on the server.
 # Notifications will be sent to your local machine via SSH reverse tunnel.
 #
-# One-line: irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/remote/install.ps1 | iex
+# One-line: irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
 
-$repoBase = "https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master"
+$repoBase = "https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper"
 $installDir = Join-Path $env:USERPROFILE ".claude\claudecode-popper"
 $settingsPath = Join-Path $env:USERPROFILE ".claude\settings.json"
 

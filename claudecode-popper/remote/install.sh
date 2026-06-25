@@ -3,11 +3,11 @@
 # Installs the remote popup script on the server.
 # Notifications will be sent to your local machine via SSH reverse tunnel.
 #
-# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/remote/install.sh | bash
+# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/install.sh | bash
 
 set -e
 
-REPO_BASE="https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master"
+REPO_BASE="https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper"
 INSTALL_DIR="$HOME/.claude/claudecode-popper"
 SETTINGS_FILE="$HOME/.claude/settings.json"
 

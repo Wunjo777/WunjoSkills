@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Claude Code Popper - Linux Uninstaller
-# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/linux/uninstall.sh | bash
+# One-line: curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/linux/uninstall.sh | bash
 
 set -e
 
