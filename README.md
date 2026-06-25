@@ -126,7 +126,7 @@ chmod +x ~/.claude/claudecode-popper/listener.sh
 Windows (PowerShell)：
 ```powershell
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\claudecode-popper" | Out-Null
-irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.ps1 -OutFile "$env:USERPROFILE\.claude\claudecode-popper\listener.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.ps1" -OutFile "$env:USERPROFILE\.claude\claudecode-popper\listener.ps1" -UseBasicParsing
 ```
 
 **第三步：启动 listener**

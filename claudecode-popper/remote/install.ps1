@@ -100,8 +100,9 @@ Write-Host "║                                                          ║" -F
 Write-Host "║     Windows:                                             ║" -ForegroundColor Green
 Write-Host "║       New-Item -ItemType Directory -Force \\" -ForegroundColor Yellow
 Write-Host "║         -Path ~\.claude\claudecode-popper | Out-Null" -ForegroundColor Yellow
-Write-Host "║       irm $repoBase/remote/listener.ps1 \\" -ForegroundColor Yellow
-Write-Host "║         -OutFile ~\.claude\claudecode-popper\listener.ps1" -ForegroundColor Yellow
+Write-Host "║       Invoke-WebRequest -Uri $repoBase/remote/listener.ps1 \\" -ForegroundColor Yellow
+Write-Host "║         -OutFile ~\.claude\claudecode-popper\listener.ps1 \\" -ForegroundColor Yellow
+Write-Host "║         -UseBasicParsing" -ForegroundColor Yellow
 Write-Host "║       powershell -File ~\.claude\claudecode-popper\listener.ps1" -ForegroundColor Yellow
 Write-Host "║                                                          ║" -ForegroundColor Green
 Write-Host "║     Linux/macOS:                                         ║" -ForegroundColor Green
