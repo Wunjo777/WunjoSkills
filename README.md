@@ -6,11 +6,11 @@ Several practical Skills/Tools for coding agents.
 
 ---
 
-# cexp(change explainer)
+# 1. Cexp(change explainer)(Skill)
 
 格式化地讲解Agent对代码的修改和设计思想，帮助用户无需自行阅读代码，就可以掌握Agent的改动
 
-# Claude Code Popper
+# 2. Claude Code Popper(Hook)
 
 Claude Code 完成任务/执行过程中发生请求时弹出桌面通知。支持 Windows / Linux / macOS。
 
