@@ -98,11 +98,17 @@ Write-Host "║                                                          ║" -F
 Write-Host "║  1. On your LOCAL machine, run the listener:             ║" -ForegroundColor Green
 Write-Host "║                                                          ║" -ForegroundColor Green
 Write-Host "║     Windows:                                             ║" -ForegroundColor Green
-Write-Host "║       irm $repoBase/remote/listener.ps1 | iex" -ForegroundColor Yellow
+Write-Host "║       New-Item -ItemType Directory -Force \\" -ForegroundColor Yellow
+Write-Host "║         -Path ~\.claude\claudecode-popper | Out-Null" -ForegroundColor Yellow
+Write-Host "║       irm $repoBase/remote/listener.ps1 \\" -ForegroundColor Yellow
+Write-Host "║         -OutFile ~\.claude\claudecode-popper\listener.ps1" -ForegroundColor Yellow
+Write-Host "║       powershell -File ~\.claude\claudecode-popper\listener.ps1" -ForegroundColor Yellow
 Write-Host "║                                                          ║" -ForegroundColor Green
 Write-Host "║     Linux/macOS:                                         ║" -ForegroundColor Green
+Write-Host "║       mkdir -p ~/.claude/claudecode-popper" -ForegroundColor Yellow
 Write-Host "║       curl -fsSL $repoBase/remote/listener.sh \\" -ForegroundColor Yellow
-Write-Host "║         -o ~/listener.sh && bash ~/listener.sh" -ForegroundColor Yellow
+Write-Host "║         -o ~/.claude/claudecode-popper/listener.sh" -ForegroundColor Yellow
+Write-Host "║       bash ~/.claude/claudecode-popper/listener.sh" -ForegroundColor Yellow
 Write-Host "║                                                          ║" -ForegroundColor Green
 Write-Host "║  2. When connecting via SSH, use:                        ║" -ForegroundColor Green
 Write-Host "║                                                          ║" -ForegroundColor Green

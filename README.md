@@ -118,13 +118,15 @@ curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/cla
 
 Linux / macOS：
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.sh -o ~/listener.sh
-chmod +x ~/listener.sh
+mkdir -p ~/.claude/claudecode-popper
+curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.sh -o ~/.claude/claudecode-popper/listener.sh
+chmod +x ~/.claude/claudecode-popper/listener.sh
 ```
 
 Windows (PowerShell)：
 ```powershell
-irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.ps1 -OutFile ~\listener.ps1
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\claudecode-popper" | Out-Null
+irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/listener.ps1 -OutFile "$env:USERPROFILE\.claude\claudecode-popper\listener.ps1"
 ```
 
 **第三步：启动 listener**
@@ -133,10 +135,10 @@ irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode
 
 ```bash
 # Linux / macOS
-bash ~/listener.sh
+bash ~/.claude/claudecode-popper/listener.sh
 
 # Windows PowerShell
-powershell -File ~\listener.ps1
+powershell -File "$env:USERPROFILE\.claude\claudecode-popper\listener.ps1"
 ```
 
 **第四步：SSH 连接时加反向隧道**
