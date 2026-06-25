@@ -43,17 +43,16 @@ function Show-Popup {
     $window.ShowDialog() | Out-Null
 }
 
-Write-Host "╔══════════════════════════════════════════════════════════╗"
-Write-Host "║        Claude Code Popper - Remote Listener             ║"
-Write-Host "╠══════════════════════════════════════════════════════════╣"
-Write-Host "║  Listening on port: $Port"
-Write-Host "║  OS: Windows"
-Write-Host "║"
-Write-Host "║  Setup SSH tunnel on your server:"
-Write-Host "║    ssh -R ${Port}:localhost:${Port} user@server"
-Write-Host "║"
-Write-Host "║  Press Ctrl+C to stop."
-Write-Host "╚══════════════════════════════════════════════════════════╝"
+Write-Host "======================================================="
+Write-Host "Claude Code Popper - Remote Listener"
+Write-Host "======================================================="
+Write-Host "Listening on port: $Port"
+Write-Host "OS: Windows"
+Write-Host ""
+Write-Host "Setup SSH tunnel on your server:"
+Write-Host "  ssh -R ${Port}:localhost:${Port} user@server"
+Write-Host ""
+Write-Host "Press Ctrl+C to stop."
 Write-Host ""
 
 try {

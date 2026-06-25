@@ -66,17 +66,16 @@ show_notification() {
 
 check_deps
 
-echo "╔══════════════════════════════════════════════════════════╗"
-echo "║        Claude Code Popper - Remote Listener             ║"
-echo "╠══════════════════════════════════════════════════════════╣"
-echo "║  Listening on port: $PORT"
-echo "║  OS: $OS"
-echo "║"
-echo "║  Setup SSH tunnel on your server:"
-echo "║    ssh -R $PORT:localhost:$PORT user@server"
-echo "║"
-echo "║  Press Ctrl+C to stop."
-echo "╚══════════════════════════════════════════════════════════╝"
+echo "=========================================================="
+echo "         Claude Code Popper - Remote Listener"
+echo "=========================================================="
+echo "Listening on port: $PORT"
+echo "OS: $OS"
+echo
+echo "Setup SSH tunnel on your server:"
+echo "  ssh -R $PORT:localhost:$PORT user@server"
+echo
+echo "Press Ctrl+C to stop."
 echo ""
 
 # Cleanup on exit
