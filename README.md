@@ -88,3 +88,86 @@ curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/mac
 | Windows | WPF Window（PowerShell）         |
 | Linux   | `notify-send`（libnotify）       |
 | macOS   | `osascript`（系统原生通知）       |
+
+## 远程服务器模式（SSH）
+
+当 Claude Code 运行在远程 Linux 服务器上（通过 SSH 连接）时，本地桌面默认无法收到弹窗。远程模式通过 **SSH 反向隧道 + TCP 监听** 解决此问题。
+
+### 原理
+
+```
+1. 本地机器运行 TCP 监听进程（listener），监听端口 9876
+2. SSH 连接时加 -R 参数建立反向隧道
+3. 服务器上 Claude Code 触发 hook → popup.sh 发送 TCP 消息到 localhost:9876
+4. SSH 隧道将消息转发到本地机器
+5. listener 收到消息，弹出本地桌面通知
+```
+
+### 安装步骤
+
+**第一步：在服务器上安装远程 popup**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/remote/install.sh | bash
+```
+
+**第二步：在本地机器上下载 listener**
+
+Linux / macOS：
+```bash
+curl -fsSL https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/remote/listener.sh -o ~/listener.sh
+chmod +x ~/listener.sh
+```
+
+Windows (PowerShell)：
+```powershell
+irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/remote/listener.ps1 -OutFile ~\listener.ps1
+```
+
+**第三步：启动 listener**
+
+在本地机器的一个终端窗口中运行：
+
+```bash
+# Linux / macOS
+bash ~/listener.sh
+
+# Windows PowerShell
+powershell -File ~\listener.ps1
+```
+
+**第四步：SSH 连接时加反向隧道**
+
+```bash
+ssh -R 9876:localhost:9876 user@your-server
+```
+
+保持 listener 运行和 SSH 连接，正常使用 Claude Code 即可收到本地弹窗。
+
+### 配置
+
+`~/.claude/claudecode-popper/config.json` 中的 `remote` 字段：
+
+```json
+{
+  "remote": {
+    "port": 9876,
+    "fallback_to_local": true
+  }
+}
+```
+
+- `port` — 监听端口，需与 SSH `-R` 参数一致（默认 9876）
+- `fallback_to_local` — TCP 发送失败时是否回退到服务器本地通知（默认 `true`）
+
+也可通过环境变量 `CLAUDE_REMOTE_PORT` 覆盖端口配置。
+
+### 两种使用方式
+
+**方式一：使用 remote/ 目录的专用脚本（推荐）**
+
+服务器上只安装 `remote/popup.sh`，专门用于远程发送。不依赖服务器桌面环境。
+
+**方式二：使用原平台脚本 + 环境变量**
+
+服务器上安装 `linux/popup.sh`，设置 `CLAUDE_REMOTE_PORT=9876` 环境变量。脚本会先尝试 TCP 发送，失败后回退到本地 `notify-send`。适合偶尔需要本地弹窗的场景。

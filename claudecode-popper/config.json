@@ -8,5 +8,9 @@
     "title": "Claude Code",
     "message": "任务完成",
     "sound": true
+  },
+  "remote": {
+    "port": 9876,
+    "fallback_to_local": true
   }
 }
