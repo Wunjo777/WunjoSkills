@@ -73,7 +73,7 @@ try {
         if ([string]::IsNullOrEmpty($msg)) { continue }
 
         # Parse protocol: TITLE|||MESSAGE
-        if ($msg -match "^(.+?)\|\|\|(.+)$") {
+        if ($msg -match '^(.+?)\|\|\|(.+)$') {
             $title = $Matches[1]
             $message = $Matches[2]
         } else {
