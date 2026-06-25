@@ -30,10 +30,14 @@ if ! command -v notify-send &>/dev/null; then
 fi
 
 # 3. Download files
-for f in popup.sh config.json uninstall.sh; do
+for f in popup.sh uninstall.sh; do
     curl -fsSL "$REPO_BASE/linux/$f" -o "$INSTALL_DIR/$f"
     echo "[OK] Downloaded $f"
 done
+
+# config.json is in repo root, not in linux/
+curl -fsSL "$REPO_BASE/config.json" -o "$INSTALL_DIR/config.json"
+echo "[OK] Downloaded config.json"
 chmod +x "$INSTALL_DIR/popup.sh" "$INSTALL_DIR/uninstall.sh"
 
 # 4. Patch settings.json

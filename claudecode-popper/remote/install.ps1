@@ -21,12 +21,14 @@ if (-not (Test-Path $installDir)) {
 }
 
 # 2. Download files
-$files = @("popup.ps1", "config.json")
-foreach ($f in $files) {
-    $dstPath = Join-Path $installDir $f
-    Invoke-WebRequest -Uri "$repoBase/remote/$f" -OutFile $dstPath -UseBasicParsing
-    Write-Host "[OK] Downloaded $f"
-}
+$dstPath = Join-Path $installDir "popup.ps1"
+Invoke-WebRequest -Uri "$repoBase/remote/popup.ps1" -OutFile $dstPath -UseBasicParsing
+Write-Host "[OK] Downloaded popup.ps1"
+
+# config.json is in repo root, not in remote/
+$dstPath = Join-Path $installDir "config.json"
+Invoke-WebRequest -Uri "$repoBase/config.json" -OutFile $dstPath -UseBasicParsing
+Write-Host "[OK] Downloaded config.json"
 
 # Also download uninstaller if not present
 $uninstallPath = Join-Path $installDir "uninstall.ps1"

@@ -16,12 +16,17 @@ if (-not (Test-Path $installDir)) {
 }
 
 # 2. Download files
-$files = @("popup.ps1", "config.json", "uninstall.ps1")
+$files = @("popup.ps1", "uninstall.ps1")
 foreach ($f in $files) {
     $dstPath = Join-Path $installDir $f
     Invoke-WebRequest -Uri "$repoBase/windows/$f" -OutFile $dstPath -UseBasicParsing
     Write-Host "[OK] Downloaded $f"
 }
+
+# config.json is in repo root, not in windows/
+$dstPath = Join-Path $installDir "config.json"
+Invoke-WebRequest -Uri "$repoBase/config.json" -OutFile $dstPath -UseBasicParsing
+Write-Host "[OK] Downloaded config.json"
 
 # 3. Patch settings.json
 $popupPath = (Join-Path $installDir "popup.ps1").Replace('\', '\\')

@@ -28,10 +28,12 @@ if ! command -v jq &>/dev/null; then
 fi
 
 # 3. Download files
-for f in popup.sh config.json; do
-    curl -fsSL "$REPO_BASE/remote/$f" -o "$INSTALL_DIR/$f"
-    echo "[OK] Downloaded $f"
-done
+curl -fsSL "$REPO_BASE/remote/popup.sh" -o "$INSTALL_DIR/popup.sh"
+echo "[OK] Downloaded popup.sh"
+
+# config.json is in repo root, not in remote/
+curl -fsSL "$REPO_BASE/config.json" -o "$INSTALL_DIR/config.json"
+echo "[OK] Downloaded config.json"
 chmod +x "$INSTALL_DIR/popup.sh"
 
 # Also download the local uninstaller if not present
