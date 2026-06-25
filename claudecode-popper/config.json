@@ -1,0 +1,12 @@
+{
+  "notification": {
+    "title": "Claude Code",
+    "message": "请求已处理",
+    "sound": true
+  },
+  "stop": {
+    "title": "Claude Code",
+    "message": "任务完成",
+    "sound": true
+  }
+}
