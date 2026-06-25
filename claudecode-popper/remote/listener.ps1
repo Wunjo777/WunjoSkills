@@ -61,6 +61,11 @@ try {
     Write-Host "[INFO] Listener started on port $Port"
 
     while ($true) {
+        if (-not $listener.Pending()) {
+            Start-Sleep -Milliseconds 200
+            continue
+        }
+
         $client = $listener.AcceptTcpClient()
         $stream = $client.GetStream()
         $reader = New-Object System.IO.StreamReader($stream)
