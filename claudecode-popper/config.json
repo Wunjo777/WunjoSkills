@@ -10,7 +10,16 @@
     "sound": true
   },
   "remote": {
+    "mode": "tunnel",
     "port": 9876,
     "fallback_to_local": true
+  },
+  "ntfy": {
+    "server": "https://ntfy.sh",
+    "topic": "",
+    "token": "",
+    "priority": "high",
+    "tags": ["robot_face"],
+    "click": ""
   }
 }

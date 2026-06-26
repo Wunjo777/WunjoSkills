@@ -1,6 +1,8 @@
 # Claude Code Popper - Remote Installer (Server-Side, PowerShell)
 # Installs the remote popup script on the server.
-# Notifications will be sent to your local machine via SSH reverse tunnel.
+# Supports two notification modes:
+#   - tunnel: SSH reverse tunnel + TCP (requires local listener)
+#   - ntfy:   ntfy.sh push service (no listener needed)
 #
 # One-line: irm https://raw.githubusercontent.com/Wunjo777/WunjoAgentTools/master/claudecode-popper/remote/install.ps1 | iex
 
@@ -89,34 +91,38 @@ $settings | ConvertTo-Json -Depth 10 | Set-Content $settingsPath -Encoding UTF8
 Write-Host "[OK] Patched settings.json"
 
 Write-Host ""
-Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Green
-Write-Host "║                    Setup Complete!                       ║" -ForegroundColor Green
-Write-Host "╠══════════════════════════════════════════════════════════╣" -ForegroundColor Green
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║  Next steps:                                             ║" -ForegroundColor Green
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║  1. On your LOCAL machine, run the listener:             ║" -ForegroundColor Green
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║     Windows:                                             ║" -ForegroundColor Green
-Write-Host "║       New-Item -ItemType Directory -Force \\" -ForegroundColor Yellow
-Write-Host "║         -Path ~\.claude\claudecode-popper | Out-Null" -ForegroundColor Yellow
-Write-Host "║       Invoke-WebRequest -Uri $repoBase/remote/listener.ps1 \\" -ForegroundColor Yellow
-Write-Host "║         -OutFile ~\.claude\claudecode-popper\listener.ps1 \\" -ForegroundColor Yellow
-Write-Host "║         -UseBasicParsing" -ForegroundColor Yellow
-Write-Host "║       powershell -File ~\.claude\claudecode-popper\listener.ps1" -ForegroundColor Yellow
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║     Linux/macOS:                                         ║" -ForegroundColor Green
-Write-Host "║       mkdir -p ~/.claude/claudecode-popper" -ForegroundColor Yellow
-Write-Host "║       curl -fsSL $repoBase/remote/listener.sh \\" -ForegroundColor Yellow
-Write-Host "║         -o ~/.claude/claudecode-popper/listener.sh" -ForegroundColor Yellow
-Write-Host "║       bash ~/.claude/claudecode-popper/listener.sh" -ForegroundColor Yellow
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║  2. When connecting via SSH, use:                        ║" -ForegroundColor Green
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║     ssh -R 9876:localhost:9876 user@this-server          ║" -ForegroundColor Yellow
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║  3. Restart Claude Code on this server.                  ║" -ForegroundColor Green
-Write-Host "║                                                          ║" -ForegroundColor Green
-Write-Host "║  Edit config: $installDir\config.json" -ForegroundColor Green
+Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Green
+Write-Host "║                      Setup Complete!                        ║" -ForegroundColor Green
+Write-Host "╠══════════════════════════════════════════════════════════════╣" -ForegroundColor Green
+Write-Host "║                                                            ║" -ForegroundColor Green
+Write-Host "║  Choose a notification mode in config.json:                ║" -ForegroundColor Green
+Write-Host "║    $installDir\config.json                                 ║" -ForegroundColor Green
+Write-Host "║                                                            ║" -ForegroundColor Green
+Write-Host "║  ┌─────────────────────────────────────────────────────┐   ║" -ForegroundColor Yellow
+Write-Host "║  │ Mode: ntfy (recommended - no listener needed)       │   ║" -ForegroundColor Yellow
+Write-Host "║  ├─────────────────────────────────────────────────────┤   ║" -ForegroundColor Yellow
+Write-Host "║  │ 1. Install ntfy app on your phone/desktop          │   ║" -ForegroundColor Yellow
+Write-Host "║  │    https://ntfy.sh/#app                            │   ║" -ForegroundColor Yellow
+Write-Host "║  │ 2. Edit config.json:                               │   ║" -ForegroundColor Yellow
+Write-Host "║  │    `"remote`": { `"mode`": `"ntfy`" }                    │   ║" -ForegroundColor Yellow
+Write-Host "║  │    `"ntfy`": { `"topic`": `"your-unique-topic-name`" }   │   ║" -ForegroundColor Yellow
+Write-Host "║  │ 3. Subscribe to the same topic in the ntfy app     │   ║" -ForegroundColor Yellow
+Write-Host "║  │ 4. Restart Claude Code                             │   ║" -ForegroundColor Yellow
+Write-Host "║  └─────────────────────────────────────────────────────┘   ║" -ForegroundColor Yellow
+Write-Host "║                                                            ║" -ForegroundColor Green
+Write-Host "║  ┌─────────────────────────────────────────────────────┐   ║" -ForegroundColor Yellow
+Write-Host "║  │ Mode: tunnel (SSH reverse tunnel + TCP)             │   ║" -ForegroundColor Yellow
+Write-Host "║  ├─────────────────────────────────────────────────────┤   ║" -ForegroundColor Yellow
+Write-Host "║  │ 1. On LOCAL machine, run the listener:             │   ║" -ForegroundColor Yellow
+Write-Host "║  │    Windows:                                        │   ║" -ForegroundColor Yellow
+Write-Host "║  │      ...listener.ps1 (see README)                  │   ║" -ForegroundColor Yellow
+Write-Host "║  │    Linux/macOS:                                    │   ║" -ForegroundColor Yellow
+Write-Host "║  │      bash ~/.claude/claudecode-popper/listener.sh  │   ║" -ForegroundColor Yellow
+Write-Host "║  │ 2. SSH with reverse tunnel:                        │   ║" -ForegroundColor Yellow
+Write-Host "║  │    ssh -R 9876:localhost:9876 user@this-server     │   ║" -ForegroundColor Yellow
+Write-Host "║  │ 3. Restart Claude Code                             │   ║" -ForegroundColor Yellow
+Write-Host "║  └─────────────────────────────────────────────────────┘   ║" -ForegroundColor Yellow
+Write-Host "║                                                            ║" -ForegroundColor Green
+Write-Host "║  Edit config: $installDir\config.json                      ║" -ForegroundColor Green
 Write-Host "║  Uninstall:   powershell -File `"$installDir\uninstall.ps1`"" -ForegroundColor Green
-Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Green
